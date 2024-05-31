@@ -1,0 +1,43 @@
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    hotel_id INT,
+    check_in DATE,
+    check_out DATE,
+    num_members INT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (hotel_id) REFERENCES hotels(id)
+);
+
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    mobile_number VARCHAR(15) NOT NULL,
+    location VARCHAR(100),
+    amenities TEXT
+);
+
+
+CREATE TABLE hotels (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    location VARCHAR(100),
+    ratings DECIMAL(3, 2),
+    available_rooms INT,
+    price DECIMAL(10, 2),
+    amenities TEXT,
+    bed_type VARCHAR(50),
+    hotelier_id INT,
+    FOREIGN KEY (hotelier_id) REFERENCES hoteliers(id)
+);
+
+
+CREATE TABLE hoteliers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+);
